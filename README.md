@@ -1,18 +1,18 @@
-# devnet2128
-Code for DevNet Workshop 2128
+# devnet2584
+Code for DevNet Workshop 2584
 
 
-Welcome to the DevNet Workshop 2128. Below are the commands you will be using at the various stages of the lab.
+Welcome to the DevNet Workshop 2584. Below are the commands you will be using at the various stages of the lab.
 
 
 ## Prep:
 
 * Download the latest code for the lab
-  * `git clone https://github.com/securenetwrk/devnet2128`
+  * `git clone https://github.com/securenetwrk/devnet2584`
 * Run start scipt
-  * `sh devnet2128/0-start.sh`
+  * `sh devnet2584/0-start.sh`
 * Change into code directory
-  * `cd devnet2128`
+  * `cd devnet2584`
 * Connect to VPN
   * `sh 1-setup.sh`
     * When prompted, enter your assigned pod number
