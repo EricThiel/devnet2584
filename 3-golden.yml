@@ -1,0 +1,54 @@
+- name: Appply golden configs to CSRs
+  hosts: csrs
+  gather_facts: no
+
+  tasks:
+
+  - name: Archive logging config
+    ios_config:
+      lines:
+        - logging enable
+        - logging size 1000
+        - hidekeys
+      parents:
+        - archive
+        - log config
+      defaults: no
+    tags: archive
+
+  - name: Apply base IOS configs
+    when: ansible_network_os == 'ios'
+    ios_config:
+      lines:
+        - clock timezone PST -8 0
+        - clock summer-time PDT recurring
+        - service timestamps debug datetime msec localtime show-timezone
+        - service timestamps log datetime msec localtime show-timezone
+        - logging buffered 12000
+    tags: base
+
+  - name: Configure system details
+    ios_system:
+      domain_name: "{{ domain_name | default('labdomain.com') }}"
+      lookup_enabled: no
+
+  - name: Create local users
+    when: ansible_network_os == 'ios'
+    ios_user:
+      aggregate: "{{local_users_full}}"
+      state: present
+      update_password: on_create
+      purge: yes
+
+  - name: Set NTP
+    when: ansible_network_os == 'ios'
+    loop: "{{ ntp_servers }}"
+    ios_config:
+      lines:
+        - ntp server {{ item }}
+      defaults: no
+      save: yes
+
+
+
+

@@ -1,0 +1,1 @@
+docker run -it --rm --privileged -v "`pwd`":/mycode securenetwrk/dnebase3

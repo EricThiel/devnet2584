@@ -1,0 +1,101 @@
+ansible_connection: network_cli
+ansible_network_os: ios
+#ansible_user: "{{username}}"
+#ansible_ssh_pass: "{{password}}"
+ansible_user: cisco
+ansible_password: cisco
+
+ntp_server1: 1.1.1.1
+ntp_server2: 8.8.8.8
+domain_name: mydomain.lab
+
+config:
+  ntp:
+    - 1.1.1.1
+    - 8.8.8.8
+  logging:
+    - 10.10.20.20
+  domain_name: mydomain.lab
+
+ntp_servers:
+  - 8.8.8.8
+  - 1.1.1.1
+
+local_users_full:
+  - name: cisco
+    privilege: 15
+    configured_password: "Cisco123"
+  - name: admin
+    privilege: 15
+    configured_password: "Cisco123"
+  - name: admin2
+    privilege: 15
+    configured_password: "Cisco123"
+
+siteid: 51
+tenants:
+  - tenant_name: finance
+    tenant_num: 11
+    segments:
+      - vlan_num: 1
+        name: "{{siteid}}-finance-data"
+        subnet: "10.{{siteid}}.111.0/24"
+      - vlan_num: 2
+        name: "{{siteid}}-finance-voice"
+        subnet: "10.{{siteid}}.112.0/24"
+  - tenant_name: engineering
+    tenant_num: 12
+    segments:
+      - vlan_num: 1
+        name: "{{siteid}}-engineering-data"
+        subnet: "10.{{siteid}}.121.0/24"
+      - vlan_num: 2
+        name: "{{siteid}}-engineering-voice"
+        subnet: "10.{{siteid}}.122.0/24"
+#  - tenant_name: hr
+#    tenant_num: 13
+#    segments:
+#      - vlan_num: 1
+#        name: "{{siteid}}-hr-data"
+#        subnet: "10.{{siteid}}.131.0/24"
+#      - vlan_num: 2
+#        name: "{{siteid}}-hr-voice"
+#        subnet: "10.{{siteid}}.132.0/24"
+#  - tenant_name: facilities
+#    tenant_num: 14
+#    segments:
+#      - vlan_num: 1
+#        name: "{{siteid}}-facilities-data"
+#        subnet: "10.{{siteid}}.141.0/24"
+#      - vlan_num: 2
+#        name: "{{siteid}}-facilities-voice"
+#        subnet: "10.{{siteid}}.142.0/24"
+
+
+links:
+  - "23"
+  - "24"
+  - "25"
+
+local_vrfs:
+  - name: red
+    description: "Red VRF"
+    rd: "1:400"
+    interfaces:
+      - Loopback11{{pod_number}}
+  - name: blue
+    description: "Blue VRF"
+    rd: "1:410"
+    interfaces:
+      - Loopback12{{pod_number}}
+#  - name: green
+#    description: "Green VRF"
+#    rd: "1:420"
+#    interfaces:
+#      - Loopback13{{pod_number}}
+#  - name: "{{user_pod}}"
+#    description: "{{user_pod}} VRF"
+#    rd: "1:{{pod_number}}"
+#    interfaces:
+#      - Loopback14{{pod_number}}
+#
