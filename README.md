@@ -7,6 +7,8 @@ Welcome to the DevNet Workshop 2584. Below are the commands you will be using at
 
 ## Prep:
 
+* Download the container
+  * `docker pull securenetwrk/dnebase3`
 * Download the latest code for the lab
   * `git clone https://github.com/securenetwrk/devnet2584`
 * Run start scipt
