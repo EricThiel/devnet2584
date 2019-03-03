@@ -40,5 +40,5 @@
       shell: "echo {{pod_pass}} > vpnpw.txt"
 
     - name: "Connecting VPN"
-      shell: "openconnect dcloud-sjc-anyconnect.cisco.com -b --no-dtls -q -u {{pod_user}} < vpnpw.txt"
+      shell: "openconnect dcloud-sng-anyconnect.cisco.com -b --no-dtls -q -u {{pod_user}} < vpnpw.txt"
 
